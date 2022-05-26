@@ -14,6 +14,8 @@ form.addEventListener("submit", (e) => {
   chat.classList.toggle("hidden");
   e.preventDefault();
   const username = e.target.username.value;
+  chatForm.msg.focus();
+  
 
   // Join chatroom
   socket.emit("joinRoom", { username });
@@ -33,7 +35,15 @@ socket.on("message", (message) => {
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
 });
+// ----------------------------------------------------------------------------------------------------------------------------------------------
+socket.on("info-message", (message) => {
+  // console.log(message);
+  outputMessage(message,2);
 
+  // Scroll down
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+});
+//--------------------------------------------------------------------------------------------------------------------------------------------
 // Message submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -56,19 +66,28 @@ chatForm.addEventListener("submit", (e) => {
 });
 
 // Output message to DOM
-function outputMessage(message) {
+function outputMessage(message,type=1) {
   const div = document.createElement("div");
   div.classList.add("message");
-  const p = document.createElement("p");
+  if(type==1){
+    if(socket.id === message.id){
+      div.classList.add("left");
+    }
+    const p = document.createElement("p");
   p.classList.add("meta");
   p.innerText = message.username;
   p.innerHTML += `<span>  ${message.time}</span>`;
-  div.appendChild(p);
+  div.appendChild(p); 
+  }else{
+    div.classList.add("center");
+  }
+  
   const para = document.createElement("p");
   para.classList.add("text");
   para.innerText = message.text;
   div.appendChild(para);
-  document.querySelector(".chat-messages").appendChild(div);
+  // document.querySelector(".chat-messages").appendChild(div);
+  document.querySelector(".chat-messages").prepend(div);
 }
 
 // Add room name to DOM

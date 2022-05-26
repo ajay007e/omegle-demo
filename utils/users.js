@@ -47,7 +47,7 @@ function userLeave(id) {
     if (i > -1) {
       activeRooms.splice(i, 1);
     }
-    console.log(rooms);
+    // console.log(rooms);
     return users.splice(index, 1)[0];
   }
 }
