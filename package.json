@@ -2,7 +2,7 @@
   "name": "chatcord",
   "version": "1.0.0",
   "description": "Realtime chat app with rooms",
-  "main": "server.js",
+  "main": "server1.js",
   "scripts": {
     "start": "node server1.js",
     "dev": "node server1.js",
