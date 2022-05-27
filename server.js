@@ -27,14 +27,22 @@ io.on("connection", (socket) => {
     socket.join(user.room);
 
     // Welcome current user
-    socket.emit("info-message", formatMessage(botName, "Welcome to ChatCord!"));
+    // socket.emit("info-message", formatMessage(botName, "Welcome to ChatCord!"));
+    if(user.f){
+      socket.emit("info-message", formatMessage(botName, "Waiting for someone to join..."));
+    }
+    else{
+    socket.emit("info-message", formatMessage(botName, "Stranger has joined the chat"));
 
+    }
     // Broadcast when a user connects
     socket.broadcast
       .to(user.room)
       .emit(
         "info-message",
-        formatMessage(botName, `${user.username} has joined the chat`)
+        // formatMessage(botName, `${user.username} has joined the chat`)
+        formatMessage(botName, `Stranger has joined the chat`)
+
       );
 
     // Send users and room info
@@ -58,14 +66,24 @@ io.on("connection", (socket) => {
     if (user) {
       io.to(user.room).emit(
         "info-message",
-        formatMessage(botName, `${user.username} has left the chat`)
+        // formatMessage(botName, `${user.username} has left the chat`)
+        formatMessage(botName, `Stranger has left the chat`)
       );
+      
 
       // Send users and room info
       io.to(user.room).emit("roomUsers", {
         room: user.room,
         users: getRoomUsers(user.room),
       });
+
+      setTimeout(()=>{
+        io.to(user.room).emit(
+          "info-message",
+          // formatMessage(botName, `${user.username} has left the chat`)
+          formatMessage(botName, `Waiting for someone to join...`)
+        );
+      },1000);
     }
   });
 });

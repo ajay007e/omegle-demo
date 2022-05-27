@@ -5,18 +5,21 @@ const activeRooms = [];
 // Join user to chat
 function userJoin(id, username) {
   var room;
+  var f;
   if (rooms.length === 0) {
     room = randomRoom();
     while (activeRooms.includes(room)) {
       room = randomRoom();
     }
     rooms.push(room);
+    f=true;
   } else {
     room = rooms.shift();
+    f=false;
     activeRooms.push(room);
     // console.log(activeRooms);
   }
-  const user = { id, username, room };
+  const user = { id, username, room ,f};
 
   users.push(user);
 
