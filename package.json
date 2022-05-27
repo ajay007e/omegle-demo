@@ -4,12 +4,14 @@
   "description": "Realtime chat app with rooms",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server",
-    "dev": "nodemon server"
+    "start": "node server1.js",
+    "dev": "node server1.js",
+    "server":"npx nodemon server1.js"
   },
   "author": "Brad Traversy",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "express": "^4.17.1",
     "moment": "^2.24.0",
     "socket.io": "^2.4.0"
