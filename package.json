@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server1.js",
     "dev": "node server1.js",
-    "server":"npx nodemon server1.js"
+    "server":"npx node server1.js"
   },
   "author": "Brad Traversy",
   "license": "MIT",
