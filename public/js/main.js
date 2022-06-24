@@ -2,6 +2,7 @@ const chatForm = document.getElementById("chat-form");
 const chatMessages = document.querySelector(".chat-messages");
 const roomName = document.getElementById("room-name");
 const userList = document.getElementById("users");
+const msgBox = document.getElementById("msg");
 const form = document.getElementById("form");
 const chat = document.querySelector(".chat-container");
 const join = document.querySelector(".join-container");
@@ -15,7 +16,6 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   const username = e.target.username.value;
   chatForm.msg.focus();
-  
 
   // Join chatroom
   socket.emit("joinRoom", { username });
@@ -38,7 +38,7 @@ socket.on("message", (message) => {
 // ----------------------------------------------------------------------------------------------------------------------------------------------
 socket.on("info-message", (message) => {
   // console.log(message);
-  outputMessage(message,2);
+  outputMessage(message, 2);
 
   // Scroll down
   chatMessages.scrollTop = chatMessages.scrollHeight;
@@ -66,35 +66,40 @@ chatForm.addEventListener("submit", (e) => {
 });
 
 // Output message to DOM
-function outputMessage(message,type=1) {
+function outputMessage(message, type = 1) {
   const div = document.createElement("div");
   div.classList.add("message");
   const p = document.createElement("p");
   p.classList.add("meta");
   p.innerText = "Stranger";
-  if(type==1){
-    if(socket.id === message.id){
+  if (type == 1) {
+    if (socket.id === message.id) {
       div.classList.add("left");
       p.innerText = "You";
     }
     p.innerHTML += `<span>  ${message.time}</span>`;
-    div.appendChild(p); 
+    div.appendChild(p);
     const para = document.createElement("p");
     para.classList.add("text");
     para.innerText = message.text;
     div.appendChild(para);
     // document.querySelector(".chat-messages").appendChild(div);
     document.querySelector(".chat-messages").prepend(div);
-  }else{
+  } else {
     // div.classList.add("center");
     // const para = document.createElement("p");
     // para.classList.add("text");
     // para.innerText = message.text;
     // div.appendChild(para);
-    document.querySelector(".chat-messages").innerHTML=`<div class="message center"><p class="text">${message.text}</p></div>`
+    document.querySelector(
+      ".chat-messages"
+    ).innerHTML = `<div class="message center"><p class="text">${message.text}</p></div>`;
+    if (message.text == "Waiting for someone to join...") {
+      msgBox.disabled = true;
+    } else {
+      msgBox.disabled = false;
+    }
   }
-  
-  
 }
 
 // Add room name to DOM
@@ -111,7 +116,7 @@ function outputMessage(message,type=1) {
 //     userList.appendChild(li);
 //   });
 // }
-function leaveRoom(){
+function leaveRoom() {
   const leaveRoom = confirm("Are you sure you want to leave the chatroom?");
   if (leaveRoom) {
     window.location = "../";

@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 
 :root {
-  --dark-color-a: #667aff;
-  --dark-color-b: #7386ff;
+  --dark-color-a: #32a9e0;
+  --dark-color-b: #469bb1;
   --light-color: #e6e9ff;
   --success-color: #5cb85c;
   --error-color: #d9534f;
@@ -38,10 +38,16 @@ a {
   border: 0;
   font-size: 17px;
 }
-.btn--1{
+.btn--1 {
   height: 40px;
 }
 
+.italic {
+  font-style: italic;
+}
+.bold {
+  font-weight: bolder;
+}
 
 .hidden {
   display: none;
@@ -74,9 +80,9 @@ a {
   /* grid-template-columns: 1fr 3fr; */
   grid-template-columns: 1fr;
 
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .chat-sidebar {
@@ -109,15 +115,13 @@ a {
   overflow-y: scroll;
 
   display: flex;
-  flex-direction:column-reverse;
+  flex-direction: column-reverse;
 
   max-width: 86.5vw;
   min-width: 86.5vw;
   /* padding-right: 200px; */
   overflow-y: scroll;
-  box-sizing: content-box; 
-
-  
+  box-sizing: content-box;
 }
 
 .chat-messages .message {
@@ -126,18 +130,15 @@ a {
   margin-bottom: 15px;
   background-color: var(--light-color);
   border-radius: 5px;
-  overflow-wrap: break-word; 
+  overflow-wrap: break-word;
   justify-content: end;
-  
-
 }
-.chat-messages .message.left{
+.chat-messages .message.left {
   text-align: right;
 }
-.chat-messages .message.center{
+.chat-messages .message.center {
   text-align: center;
 }
-
 
 .chat-messages .message .meta {
   font-size: 15px;
@@ -165,6 +166,7 @@ a {
   padding: 5px;
   height: 40px;
   flex: 1;
+  outline: none;
 }
 
 /* Join Page */
@@ -247,10 +249,10 @@ a {
   }
   .chat-messages {
     padding: 30px 200px 30px 5%;
-  max-height: 55vh;
-  min-height: 55vh;
+    max-height: 55vh;
+    min-height: 55vh;
 
-  max-width: 80.5vw;
-  min-width: 80.5vw;
+    max-width: 80.5vw;
+    min-width: 80.5vw;
   }
 }
